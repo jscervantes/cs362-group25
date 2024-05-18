@@ -29,7 +29,7 @@ class Function2Tests(unittest.TestCase):
         expected = datetime.utcfromtimestamp(num_sec).strftime('%m-%d-%Y')
         self.assertEqual(actual, expected)
 
-    def xtest_random_large_set(self):
+    def test_random_large_set(self):
         """Random tests that go up to 12/31/9999"""
         tests = 10000
         for i in range(tests):
