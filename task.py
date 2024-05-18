@@ -33,5 +33,21 @@ def leap_year(year):
     return False
 
 
+def find_year(days_remaining):
+    """Determines the year of the new date and returns the year and the remaining days"""
+
+    # Iterates through each year until days remaining are less than a full year
+    year = 1970
+    while (leap_year(year) is True and days_remaining >= 366) or (leap_year(year) is False and days_remaining >= 365):
+        if leap_year(year):
+            days_remaining -= 366
+            year += 1
+        else:
+            days_remaining -= 365
+            year += 1
+
+    return year, days_remaining
+
+
 def conv_endian(num, endian='big'):
     pass
