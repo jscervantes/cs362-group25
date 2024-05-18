@@ -10,7 +10,20 @@ def my_datetime(num_sec):
     # Calculates the number of days
     year_days_remaining = (num_sec/86400)
 
-    return num_sec
+    # Calculates the year and the remaining days
+    year, month_days_remaining = find_year(year_days_remaining)
+
+    # Calculates the month and the remaining days
+    month, days_remaining = find_month(month_days_remaining, year)
+
+    # Calculates the day
+    day = int(days_remaining) + 1
+
+    # Adding padded 0s
+    month = '{:02d}'.format(month)
+    day = '{:02d}'.format(day)
+
+    return '{}-{}-{}'.format(month, day, year)
 
 
 def leap_year(year):
@@ -47,6 +60,23 @@ def find_year(days_remaining):
             year += 1
 
     return year, days_remaining
+
+
+def find_month(days_remaining, year):
+    """Determines the month of the new date and returns the month and the remaining days"""
+
+    # Determines leap year and corresponding number of days for each month
+    if leap_year(year):
+        days_in_month = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    else:
+        days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+    # Iterates each month until days remaining are less than a full month
+    for month in range(len(days_in_month)):
+        if days_remaining >= days_in_month[month]:
+            days_remaining -= days_in_month[month]
+        else:
+            return month + 1, days_remaining
 
 
 def conv_endian(num, endian='big'):
