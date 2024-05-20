@@ -10,6 +10,11 @@ class TestCase(unittest.TestCase):
         self.assertTrue(True)
 
 
+class Function1Tests(unittest.TestCase):
+    def test1(self):
+        pass
+
+
 class Function2Tests(unittest.TestCase):
     # Citation:
     # For utcfromtimestamp(): https://docs.python.org/3/library/datetime.html#datetime.datetime.utcfromtimestamp
