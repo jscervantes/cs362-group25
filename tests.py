@@ -1,5 +1,5 @@
 import unittest
-from task import my_datetime
+from task import my_datetime, conv_endian
 from datetime import datetime
 import random
 
@@ -55,7 +55,11 @@ class Function2Tests(unittest.TestCase):
 
 class Function3Tests(unittest.TestCase):
     def test1(self):
-        pass
+        """Test function returns correct output when endian not 'big' or 'small'"""
+        endian = 'other'
+        actual = conv_endian(11, endian)
+        expected = None
+        self.assertEqual(actual, expected)
 
 if __name__ == '__main__':
     unittest.main()

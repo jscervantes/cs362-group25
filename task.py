@@ -84,4 +84,5 @@ def conv_endian(num, endian='big'):
     """
     Takes an integer num and converts it to a hexadecimal number. Endian type is determined by endian flag.
     """
-    pass
+    if endian not in ('big', 'little'):
+        return None
