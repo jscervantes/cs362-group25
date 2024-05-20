@@ -53,5 +53,9 @@ class Function2Tests(unittest.TestCase):
             self.assertEqual(actual, expected, msg='num_secs={}'.format(num_sec))
 
 
+class Function3Tests(unittest.TestCase):
+    def test1(self):
+        pass
+
 if __name__ == '__main__':
     unittest.main()
