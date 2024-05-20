@@ -9,6 +9,9 @@ class TestCase(unittest.TestCase):
     def test1(self):
         self.assertTrue(True)
 
+class Function1Tests(unittest.TestCase):
+    pass
+
 
 class Function2Tests(unittest.TestCase):
     # Citation:

@@ -1,4 +1,5 @@
 def conv_num(num_str):
+    """Takes in a string and converts it into a base 10 number, and returns it."""
     pass
 
 
