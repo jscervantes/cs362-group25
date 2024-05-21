@@ -86,17 +86,29 @@ def conv_endian(num, endian='big'):
     """
     if endian not in ('big', 'little'):
         return None
-    
+
     # Convert the integer into hexidecimal
-    hex_str = '0'
+    hex_chars = '0123456789ABCDEF'
+    hex_str = ''
+    
+    if num == 0:
+        hex_str = '0'
+
+    # Add converted remainders to hex_str in reverse order
+    while num > 0:
+        hex_str = hex_chars[num % 16] + hex_str
+        num //= 16
 
     # Ensure the string has even number of characters, padding if needed
     if len(hex_str) % 2 != 0:
         hex_str = '0' + hex_str
 
-    # Split the string into bytes 
+    # Split the string into bytes
+    hex_bytes = [hex_str[i:i+2] for i in range(0, len(hex_str), 2)]
 
+    # Join bytes with space between!
+    return_hex = ' '.join(hex_bytes)
 
     # Manually reorder the bytes if the endian type is little
 
-    return hex_str
+    return return_hex

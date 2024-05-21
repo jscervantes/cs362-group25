@@ -67,5 +67,12 @@ class Function3Tests(unittest.TestCase):
         expected = '00'
         self.assertEqual(actual, expected)
 
+    def test3(self):
+        """Test function handles example integer correctly. Endian argument not passed.
+        Stolen from exploration."""
+        actual = conv_endian(954786)
+        expected = '0E 91 A2'
+        self.assertEqual(actual, expected)
+
 if __name__ == '__main__':
     unittest.main()
