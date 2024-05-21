@@ -12,7 +12,7 @@ def conv_num(num_str):
 
     # Check if the passed string is a number.
     if is_valid_num(num_str):
-        # if it is, then convert the string to a number. 
+        # if it is, then convert the string to a number.
         return str_to_num(num_str)
     else:
         return None
