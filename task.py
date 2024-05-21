@@ -10,6 +10,9 @@ def conv_num(num_str):
     if not isinstance(num_str, str):
         return None
 
+    # Strip leading and trailing whitespace from string.
+    num_str = num_str.strip()
+
     # Check if the passed string is a number.
     if is_valid_num(num_str):
         # if it is, then convert the string to a number.
@@ -20,6 +23,15 @@ def conv_num(num_str):
 
 def is_valid_num(num_str):
     """Helper function to return true if the string is a number."""
+    # Check if negative.
+    if num_str[0] == '-':
+        # strip string of negative sign.
+        num_str = num_str[1:]
+        # check to see if string is empty.
+        if len(num_str) == 0:
+            return False
+
+    # Iterate through string to see if it matches the numbers.
     for char in num_str:
         if char not in '0123456789':
             return False
@@ -28,12 +40,24 @@ def is_valid_num(num_str):
 
 def str_to_num(num_str):
     """Helper function to convert the string to a number"""
+    # Track negative flag.
+    is_negative = False
+    # If negative mark flag true.
+    if num_str[0] == '-':
+        is_negative = True
+        # strip negative sign.
+        num_str = num_str[1:]
+
     # Stores the converted digits.
     num = 0
     for char in num_str:
         # Converts the character from ASCII to a digit
         digit = ord(char) - ord('0')
         num = num * 10 + digit
+
+    # if string is negative, return negative num.
+    if is_negative:
+        return -num
     return num
 
 
