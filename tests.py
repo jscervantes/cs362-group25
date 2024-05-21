@@ -11,7 +11,6 @@ class TestCase(unittest.TestCase):
 
 
 class Function1Tests(unittest.TestCase):
-
     def test1(self):
         """Test if empty string"""
         num_str = ''
