@@ -86,3 +86,17 @@ def conv_endian(num, endian='big'):
     """
     if endian not in ('big', 'little'):
         return None
+    
+    # Convert the integer into hexidecimal
+    hex_str = '0'
+
+    # Ensure the string has even number of characters, padding if needed
+    if len(hex_str) % 2 != 0:
+        hex_str = '0' + hex_str
+
+    # Split the string into bytes 
+
+
+    # Manually reorder the bytes if the endian type is little
+
+    return hex_str

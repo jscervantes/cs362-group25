@@ -61,5 +61,11 @@ class Function3Tests(unittest.TestCase):
         expected = None
         self.assertEqual(actual, expected)
 
+    def test2(self):
+        """Test function handles '0' correctly."""
+        actual = conv_endian(0)
+        expected = '00'
+        self.assertEqual(actual, expected)
+
 if __name__ == '__main__':
     unittest.main()
