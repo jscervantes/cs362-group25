@@ -1,5 +1,6 @@
 def conv_num(num_str):
-    """Takes in a string and converts it into a base 10 number, and returns it."""
+    """Takes in a string and converts it into a base 10 number,
+    and returns it."""
 
     # Check if the string is empty.
     if len(num_str) == 0:
@@ -11,8 +12,10 @@ def conv_num(num_str):
 
     # Check if the passed string is a number.
     if is_valid_num(num_str):
-        pass
-        # insert code to convert string to number without using int()
+        # if it is, then convert the string to a number. 
+        return str_to_num(num_str)
+    else:
+        return None
 
 
 def is_valid_num(num_str):
@@ -21,6 +24,17 @@ def is_valid_num(num_str):
         if char not in '0123456789':
             return False
     return True
+
+
+def str_to_num(num_str):
+    """Helper function to convert the string to a number"""
+    # Stores the converted digits.
+    num = 0
+    for char in num_str:
+        # Converts the character from ASCII to a digit
+        digit = ord(char) - ord('0')
+        num = num * 10 + digit
+    return num
 
 
 def my_datetime(num_sec):

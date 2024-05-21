@@ -23,6 +23,13 @@ class Function1Tests(unittest.TestCase):
         result = conv_num(num_str)
         self.assertEqual(result, None)
 
+    def test3(self):
+        """Test if a string returns an integer"""
+        num_str = '123456'
+        result = conv_num(num_str)
+        expected = 123456
+        self.assertEqual(result, expected)
+
 
 class Function2Tests(unittest.TestCase):
     # Citation:
