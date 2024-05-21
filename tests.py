@@ -1,5 +1,5 @@
 import unittest
-from task import my_datetime
+from task import my_datetime, conv_num
 from datetime import datetime
 import random
 
@@ -9,8 +9,20 @@ class TestCase(unittest.TestCase):
     def test1(self):
         self.assertTrue(True)
 
+
 class Function1Tests(unittest.TestCase):
-    pass
+
+    def test1(self):
+        """Test if empty string"""
+        num_str = ''
+        result = conv_num(num_str)
+        self.assertEqual(result, None)
+
+    def test2(self):
+        """Test if input is a string"""
+        num_str = [1, 2, 3]
+        result = conv_num(num_str)
+        self.assertEqual(result, None)
 
 
 class Function2Tests(unittest.TestCase):
