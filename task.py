@@ -88,6 +88,10 @@ def str_to_num(num_str):
         # store int number + (frac_num/frac_pos) in num.
         num += frac_num / frac_pos
 
+    # if num has a "." make it a float.
+    if '.' in num_str:
+        num = num * 1.0
+
     # if string is negative, return negative num.
     if is_negative:
         return -num

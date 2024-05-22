@@ -44,6 +44,14 @@ class Function1Tests(unittest.TestCase):
         expected = -123.45
         self.assertEqual(result, expected)
 
+    def test_float(self):
+        """Testing different float strings."""
+        num_str = "-123."
+        result = conv_num(num_str)
+        print(result)
+        expected = -123.0
+        self.assertEqual(result, expected)
+
 
 class Function2Tests(unittest.TestCase):
     # Citation:
