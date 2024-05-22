@@ -1,9 +1,5 @@
 import unittest
-<<<<<<< HEAD
-from task import my_datetime, conv_endian
-=======
-from task import my_datetime, conv_num
->>>>>>> cfcbf2b2432b0ad76580abe9554ae123d06bd252
+from task import my_datetime, conv_endian, conv_num
 from datetime import datetime
 import random
 
