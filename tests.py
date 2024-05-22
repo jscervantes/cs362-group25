@@ -131,6 +131,17 @@ class Function3Tests(unittest.TestCase):
         expected = '0E 91 A2'
         self.assertEqual(actual, expected)
 
+    def test4(self):
+        """
+        Test function handles negative integer correctly.
+        Endian argument not passed.
+        From exploration.
+        """
+        actual = conv_endian(-954786)
+        expected = '-0E 91 A2'
+        self.assertEqual(actual, expected)
+
+
 
 if __name__ == '__main__':
     unittest.main()

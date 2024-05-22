@@ -173,6 +173,13 @@ def conv_endian(num, endian='big'):
     """
     if endian not in ('big', 'little'):
         return None
+    
+    if num < 0:
+        is_neg = True
+    else:
+        is_neg = False
+
+    num = abs(num)
 
     # Convert the integer into hexidecimal
     hex_chars = '0123456789ABCDEF'
@@ -196,5 +203,9 @@ def conv_endian(num, endian='big'):
     return_hex = ' '.join(hex_bytes)
 
     # Manually reorder the bytes if the endian type is little
+
+    # Set sign of return_hex
+    if is_neg:
+        return_hex = '-' + return_hex
 
     return return_hex
