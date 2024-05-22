@@ -173,7 +173,6 @@ def conv_endian(num, endian='big'):
     """
     if endian not in ('big', 'little'):
         return None
-    
     if num < 0:
         is_neg = True
     else:
