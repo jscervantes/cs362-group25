@@ -168,7 +168,8 @@ def find_month(days_remaining, year):
 
 def conv_endian(num, endian='big'):
     """
-    Takes an integer num and converts it to a hexadecimal number. Endian type is determined by endian flag.
+    Takes an integer num and converts it to a hexadecimal number. Endian type
+    is determined by endian flag.
     """
     if endian not in ('big', 'little'):
         return None
@@ -176,7 +177,6 @@ def conv_endian(num, endian='big'):
     # Convert the integer into hexidecimal
     hex_chars = '0123456789ABCDEF'
     hex_str = ''
-    
     if num == 0:
         hex_str = '0'
 

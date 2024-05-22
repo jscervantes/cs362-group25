@@ -106,7 +106,10 @@ class Function2Tests(unittest.TestCase):
 
 class Function3Tests(unittest.TestCase):
     def test1(self):
-        """Test function returns correct output when endian not 'big' or 'small'"""
+        """
+        Test function returns correct output when endian not 'big' or
+        'small'
+        """
         endian = 'other'
         actual = conv_endian(11, endian)
         expected = None
@@ -119,8 +122,11 @@ class Function3Tests(unittest.TestCase):
         self.assertEqual(actual, expected)
 
     def test3(self):
-        """Test function handles example integer correctly. Endian argument not passed.
-        Stolen from exploration."""
+        """
+        Test function handles example integer correctly.
+        Endian argument not passed.
+        From exploration.
+        """
         actual = conv_endian(954786)
         expected = '0E 91 A2'
         self.assertEqual(actual, expected)
