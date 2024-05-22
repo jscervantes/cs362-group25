@@ -13,10 +13,13 @@ def conv_num(num_str):
     # Strip leading and trailing whitespace from string.
     num_str = num_str.strip()
 
-    # Check if the passed string is a number.
+    # Check if the passed string is a valid number.
     if is_valid_num(num_str):
         # if it is, then convert the string to a number.
         return str_to_num(num_str)
+    elif is_valid_hex(num_str):
+        # if a valid hex, convert string to a number.
+        return hex_to_num(num_str)
     else:
         return None
 
@@ -44,6 +47,20 @@ def is_valid_num(num_str):
         if char not in '0123456789.':
             return False
     return True
+
+
+def is_valid_hex(num_str):
+    """Helper function to return true if the string is a valid hexadecimal."""
+    if len(num_str) > 2 and num_str[0] == '0' and (num_str[1] == 'x' or
+                                                   num_str[1] == 'X'):
+        # store the numbers after the hex prefix.
+        hex_part = num_str[2:]
+        # Iterate through the hex_part to see if is valid.
+        for char in hex_part:
+            if char not in '0123456789abcdefABCDEF':
+                return False
+        return True
+    return False
 
 
 def str_to_num(num_str):
@@ -96,6 +113,28 @@ def str_to_num(num_str):
     if is_negative:
         return -num
     return num
+
+
+def hex_to_num(num_str):
+    """Helper function to convert a valid hexadecimal string
+    to a base 10 number."""
+    # Map to match the hexadecimal value to it's number.
+    hex_map = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7,
+               '8': 8, '9': 9, 'a': 10, 'b': 11, 'c': 12, 'd': 13, 'e': 14,
+               'f': 15, 'A': 10, 'B': 11, 'C': 12, 'D': 13, 'E': 14, 'F': 15}
+
+    # strip the hex_number.
+    hex_part = num_str[2:]
+    # store the converted number.
+    decimal_number = 0
+    # Iterate through the string and verify if it is in the hex_map.
+    for char in hex_part:
+        if char in hex_map:
+            # Convert from hexadecimal to base 10 number.
+            decimal_number = decimal_number * 16 + hex_map[char]
+        else:
+            return None
+    return decimal_number
 
 
 def my_datetime(num_sec):
