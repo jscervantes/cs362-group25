@@ -159,6 +159,15 @@ class Function3Tests(unittest.TestCase):
         expected = 'A2 91 0E'
         self.assertEqual(actual, expected)
 
+    def test7(self):
+        """
+        Test function handles 'little' endian argument with negative integer.
+        From exploration.
+        """
+        actual = conv_endian(954786, 'little')
+        expected = '-A2 91 0E'
+        self.assertEqual(actual, expected)
+
 
 if __name__ == '__main__':
     unittest.main()
