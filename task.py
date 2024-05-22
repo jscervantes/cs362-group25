@@ -199,10 +199,12 @@ def conv_endian(num, endian='big'):
     # Split the string into bytes
     hex_bytes = [hex_str[i:i+2] for i in range(0, len(hex_str), 2)]
 
+    # Manually reorder the bytes if the endian type is little
+    if endian == 'little':
+        hex_bytes.reverse()
+
     # Join bytes with space between!
     return_hex = ' '.join(hex_bytes)
-
-    # Manually reorder the bytes if the endian type is little
 
     # Set sign of return_hex
     if is_neg:

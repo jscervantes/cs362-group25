@@ -141,6 +141,23 @@ class Function3Tests(unittest.TestCase):
         expected = '-0E 91 A2'
         self.assertEqual(actual, expected)
 
+    def test5(self):
+        """
+        Test function handles 'big' endian argument with positive integer.
+        From exploration.
+        """
+        actual = conv_endian(954786, 'big')
+        expected = '0E 91 A2'
+        self.assertEqual(actual, expected)
+
+    def test6(self):
+        """
+        Test function handles 'little' endian argument with positive integer.
+        From exploration.
+        """
+        actual = conv_endian(954786, 'little')
+        expected = 'A2 91 0E'
+        self.assertEqual(actual, expected)
 
 
 if __name__ == '__main__':
