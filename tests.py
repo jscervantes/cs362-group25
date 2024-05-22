@@ -164,7 +164,7 @@ class Function3Tests(unittest.TestCase):
         Test function handles 'little' endian argument with negative integer.
         From exploration.
         """
-        actual = conv_endian(954786, 'little')
+        actual = conv_endian(-954786, 'little')
         expected = '-A2 91 0E'
         self.assertEqual(actual, expected)
 
