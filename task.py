@@ -1,6 +1,97 @@
 def conv_num(num_str):
-    """Takes in a string and converts it into a base 10 number, and returns it."""
-    pass
+    """Takes in a string and converts it into a base 10 number,
+    and returns it."""
+
+    # Check if the string is empty.
+    if len(num_str) == 0:
+        return None
+
+    # Check if the string is a string.
+    if not isinstance(num_str, str):
+        return None
+
+    # Strip leading and trailing whitespace from string.
+    num_str = num_str.strip()
+
+    # Check if the passed string is a number.
+    if is_valid_num(num_str):
+        # if it is, then convert the string to a number.
+        return str_to_num(num_str)
+    else:
+        return None
+
+
+def is_valid_num(num_str):
+    """Helper function to return true if the string is a number."""
+    # Check if negative.
+    if num_str[0] == '-':
+        # strip string of negative sign.
+        num_str = num_str[1:]
+        # check to see if string is empty.
+        if len(num_str) == 0:
+            return False
+
+    # Check for valid decimal points.
+    if num_str.count('.') > 1:
+        return False
+
+    # Check if the string only has a decmial point.
+    if num_str == '.':
+        return False
+
+    # Iterate through string to see if it matches the numbers.
+    for char in num_str:
+        if char not in '0123456789.':
+            return False
+    return True
+
+
+def str_to_num(num_str):
+    """Helper function to convert the string to a number"""
+    # Track negative flag.
+    is_negative = False
+    # If negative mark flag true.
+    if num_str[0] == '-':
+        is_negative = True
+        # strip negative sign.
+        num_str = num_str[1:]
+
+    # Check if the number is a float.
+    if '.' in num_str:
+        # Split the string at the "." and assign variables.
+        int_part, fraction_part = num_str.split('.')
+    else:
+        int_part, fraction_part = num_str, ''
+
+    # Store the converted integer part.
+    num = 0
+    for char in int_part:
+        # Converts the character from ASCII to a digit
+        digit = ord(char) - ord('0')
+        num = num * 10 + digit
+
+    # Store the converted fractional part.
+    if fraction_part:
+        # store the fraction number.
+        frac_num = 0
+        # Keep track of pos to the right of decimal.
+        frac_pos = 1
+
+        # iterate through the fraction_part.
+        for char in fraction_part:
+            # Converts char into a digit.
+            digit = ord(char) - ord('0')
+            # Keep track of base 10 position.
+            frac_num = frac_num * 10 + digit
+            # Every iteration the fraction position is stored.
+            frac_pos *= 10
+        # store int number + (frac_num/frac_pos) in num.
+        num += frac_num / frac_pos
+
+    # if string is negative, return negative num.
+    if is_negative:
+        return -num
+    return num
 
 
 def my_datetime(num_sec):

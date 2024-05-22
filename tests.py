@@ -1,5 +1,5 @@
 import unittest
-from task import my_datetime
+from task import my_datetime, conv_num
 from datetime import datetime
 import random
 
@@ -11,8 +11,38 @@ class TestCase(unittest.TestCase):
 
 
 class Function1Tests(unittest.TestCase):
-    def test1(self):
-        pass
+    def test_empty_string(self):
+        """Test if empty string"""
+        num_str = ''
+        result = conv_num(num_str)
+        self.assertEqual(result, None)
+
+    def test_if_string(self):
+        """Test if input is a string"""
+        num_str = [1, 2, 3]
+        result = conv_num(num_str)
+        self.assertEqual(result, None)
+
+    def test_if_number(self):
+        """Test if a string returns an integer"""
+        num_str = '123456'
+        result = conv_num(num_str)
+        expected = 123456
+        self.assertEqual(result, expected)
+
+    def test_if_negative(self):
+        """Test if string returns negative."""
+        num_str = "-123"
+        result = conv_num(num_str)
+        expected = -123
+        self.assertEqual(result, expected)
+
+    def test_if_float(self):
+        """Test if string is a float."""
+        num_str = '-123.45'
+        result = conv_num(num_str)
+        expected = -123.45
+        self.assertEqual(result, expected)
 
 
 class Function2Tests(unittest.TestCase):
