@@ -58,15 +58,36 @@ class Function2Tests(unittest.TestCase):
         self.assertEqual(actual, expected)
 
     def test2(self):
+        """Test edge case of 12/31/9999"""
+        num_sec = 253402300799
+        actual = my_datetime(num_sec)
+        expected = datetime.utcfromtimestamp(num_sec).strftime('%m-%d-%Y')
+        self.assertEqual(actual, expected)
+
+    def test3(self):
         """Test example in assignment"""
-        num_sec = 987654321
+        num_sec = 9876543210
+        actual = my_datetime(num_sec)
+        expected = datetime.utcfromtimestamp(num_sec).strftime('%m-%d-%Y')
+        self.assertEqual(actual, expected)
+
+    def test4(self):
+        """Test example in assignment"""
+        num_sec = 123456789
+        actual = my_datetime(num_sec)
+        expected = datetime.utcfromtimestamp(num_sec).strftime('%m-%d-%Y')
+        self.assertEqual(actual, expected)
+
+    def test5(self):
+        """Test example in assignment"""
+        num_sec = 201653971200
         actual = my_datetime(num_sec)
         expected = datetime.utcfromtimestamp(num_sec).strftime('%m-%d-%Y')
         self.assertEqual(actual, expected)
 
     def test_random_large_set(self):
         """Random tests that go up to 12/31/9999"""
-        tests = 10000
+        tests = 100000
         for i in range(tests):
             num_sec = random.randint(0, 253402300799)
             actual = my_datetime(num_sec)
@@ -74,8 +95,8 @@ class Function2Tests(unittest.TestCase):
             self.assertEqual(actual, expected, msg='num_secs={}'.format(num_sec))
 
     def test_random_small_set(self):
-        """Random tests that can run locally but don't go up to year 9999"""
-        tests = 10000
+        """Random tests that run locally but will not go up to year 9999"""
+        tests = 100000
         for i in range(tests):
             num_sec = random.randint(0, 9999999999)
             actual = my_datetime(num_sec)
