@@ -31,9 +31,17 @@ def is_valid_num(num_str):
         if len(num_str) == 0:
             return False
 
+    # Check for valid decimal points.
+    if num_str.count('.') > 1:
+        return False
+
+    # Check if the string only has a decmial point.
+    if num_str == '.':
+        return False
+
     # Iterate through string to see if it matches the numbers.
     for char in num_str:
-        if char not in '0123456789':
+        if char not in '0123456789.':
             return False
     return True
 
@@ -48,12 +56,37 @@ def str_to_num(num_str):
         # strip negative sign.
         num_str = num_str[1:]
 
-    # Stores the converted digits.
+    # Check if the number is a float.
+    if '.' in num_str:
+        # Split the string at the "." and assign variables.
+        int_part, fraction_part = num_str.split('.')
+    else:
+        int_part, fraction_part = num_str, ''
+
+    # Store the converted integer part.
     num = 0
-    for char in num_str:
+    for char in int_part:
         # Converts the character from ASCII to a digit
         digit = ord(char) - ord('0')
         num = num * 10 + digit
+
+    # Store the converted fractional part.
+    if fraction_part:
+        # store the fraction number.
+        frac_num = 0
+        # Keep track of pos to the right of decimal.
+        frac_pos = 1
+
+        # iterate through the fraction_part.
+        for char in fraction_part:
+            # Converts char into a digit.
+            digit = ord(char) - ord('0')
+            # Keep track of base 10 position.
+            frac_num = frac_num * 10 + digit
+            # Every iteration the fraction position is stored.
+            frac_pos *= 10
+        # store int number + (frac_num/frac_pos) in num.
+        num += frac_num / frac_pos
 
     # if string is negative, return negative num.
     if is_negative:
