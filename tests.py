@@ -131,5 +131,6 @@ class Function3Tests(unittest.TestCase):
         expected = '0E 91 A2'
         self.assertEqual(actual, expected)
 
+
 if __name__ == '__main__':
     unittest.main()
