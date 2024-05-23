@@ -180,6 +180,21 @@ def conv_endian(num, endian='big'):
 
     num = abs(num)
 
+    hex_str = conv_hex(num)
+    return_hex = split_bytes(hex_str, endian)
+
+    # Set sign of return_hex
+    if is_neg:
+        return_hex = '-' + return_hex
+
+    return return_hex
+
+
+def conv_hex(num):
+    """
+    Helper function for conv_endian. Takes integer, returns padded
+    hex string.
+    """
     # Convert the integer into hexidecimal
     hex_chars = '0123456789ABCDEF'
     hex_str = ''
@@ -195,6 +210,15 @@ def conv_endian(num, endian='big'):
     if len(hex_str) % 2 != 0:
         hex_str = '0' + hex_str
 
+    return hex_str
+
+
+def split_bytes(hex_str, endian):
+    """
+    Helper function for conv_endian. Takes unordered and unsplit hex string
+    and returns hex string split into bytes and ordered by endianess.
+    """
+
     # Split the string into bytes
     hex_bytes = [hex_str[i:i+2] for i in range(0, len(hex_str), 2)]
 
@@ -203,10 +227,4 @@ def conv_endian(num, endian='big'):
         hex_bytes.reverse()
 
     # Join bytes with space between!
-    return_hex = ' '.join(hex_bytes)
-
-    # Set sign of return_hex
-    if is_neg:
-        return_hex = '-' + return_hex
-
-    return return_hex
+    return ' '.join(hex_bytes)
