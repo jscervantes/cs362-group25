@@ -61,8 +61,8 @@ class Function1Tests(unittest.TestCase):
 
 class Function2Tests(unittest.TestCase):
     # Citation:
-    # For utcfromtimestamp(): https://docs.python.org/3/library/datetime.html#datetime.datetime.utcfromtimestamp
-    # For strftime(): https://docs.python.org/3/library/datetime.html#datetime.date.strftime
+    # docs.python.org/3/library/datetime.html#datetime.datetime.utcfromtimestamp
+    # docs.python.org/3/library/datetime.html#datetime.date.strftime
 
     def test1(self):
         """Test edge case of 0 seconds"""
@@ -99,6 +99,13 @@ class Function2Tests(unittest.TestCase):
         expected = datetime.utcfromtimestamp(num_sec).strftime('%m-%d-%Y')
         self.assertEqual(actual, expected)
 
+    def test6(self):
+        """Test 2/29 in leap year"""
+        num_sec = 1709193600
+        actual = my_datetime(num_sec)
+        expected = datetime.utcfromtimestamp(num_sec).strftime('%m-%d-%Y')
+        self.assertEqual(actual, expected)
+
     def test_random_large_set(self):
         """Random tests that go up to 12/31/9999"""
         tests = 100000
@@ -106,7 +113,7 @@ class Function2Tests(unittest.TestCase):
             num_sec = random.randint(0, 253402300799)
             actual = my_datetime(num_sec)
             expected = datetime.utcfromtimestamp(num_sec).strftime('%m-%d-%Y')
-            self.assertEqual(actual, expected, msg='num_secs={}'.format(num_sec))
+            self.assertEqual(actual, expected)
 
     def test_random_small_set(self):
         """Random tests that run locally but will not go up to year 9999"""
@@ -115,7 +122,7 @@ class Function2Tests(unittest.TestCase):
             num_sec = random.randint(0, 9999999999)
             actual = my_datetime(num_sec)
             expected = datetime.utcfromtimestamp(num_sec).strftime('%m-%d-%Y')
-            self.assertEqual(actual, expected, msg='num_secs={}'.format(num_sec))
+            self.assertEqual(actual, expected)
 
 
 class Function3Tests(unittest.TestCase):
