@@ -44,6 +44,20 @@ class Function1Tests(unittest.TestCase):
         expected = -123.45
         self.assertEqual(result, expected)
 
+    def test_float(self):
+        """Testing different float strings."""
+        num_str = "-123."
+        result = conv_num(num_str)
+        expected = -123.0
+        self.assertEqual(result, expected)
+
+    def test_hex(self):
+        """Testing hex string function."""
+        num_str = "-0xAD4"
+        result = conv_num(num_str)
+        expected = -2772
+        self.assertEqual(result, expected)
+
 
 class Function2Tests(unittest.TestCase):
     # Citation:
