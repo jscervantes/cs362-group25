@@ -1,5 +1,5 @@
 import unittest
-from task import my_datetime, conv_num
+from task import my_datetime, conv_endian, conv_num
 from datetime import datetime
 import random
 
@@ -116,6 +116,71 @@ class Function2Tests(unittest.TestCase):
             actual = my_datetime(num_sec)
             expected = datetime.utcfromtimestamp(num_sec).strftime('%m-%d-%Y')
             self.assertEqual(actual, expected, msg='num_secs={}'.format(num_sec))
+
+
+class Function3Tests(unittest.TestCase):
+    def test1(self):
+        """
+        Test function returns correct output when endian not 'big' or
+        'small'
+        """
+        endian = 'other'
+        actual = conv_endian(11, endian)
+        expected = None
+        self.assertEqual(actual, expected)
+
+    def test2(self):
+        """Test function handles '0' correctly."""
+        actual = conv_endian(0)
+        expected = '00'
+        self.assertEqual(actual, expected)
+
+    def test3(self):
+        """
+        Test function handles example integer correctly.
+        Endian argument not passed.
+        From exploration.
+        """
+        actual = conv_endian(954786)
+        expected = '0E 91 A2'
+        self.assertEqual(actual, expected)
+
+    def test4(self):
+        """
+        Test function handles negative integer correctly.
+        Endian argument not passed.
+        From exploration.
+        """
+        actual = conv_endian(-954786)
+        expected = '-0E 91 A2'
+        self.assertEqual(actual, expected)
+
+    def test5(self):
+        """
+        Test function handles 'big' endian argument with positive integer.
+        From exploration.
+        """
+        actual = conv_endian(954786, 'big')
+        expected = '0E 91 A2'
+        self.assertEqual(actual, expected)
+
+    def test6(self):
+        """
+        Test function handles 'little' endian argument with positive integer.
+        From exploration.
+        """
+        actual = conv_endian(954786, 'little')
+        expected = 'A2 91 0E'
+        self.assertEqual(actual, expected)
+
+    def test7(self):
+        """
+        Test function handles 'little' endian argument with negative integer.
+        From exploration.
+        """
+        actual = conv_endian(-954786, 'little')
+        expected = '-A2 91 0E'
+        self.assertEqual(actual, expected)
 
 
 if __name__ == '__main__':
