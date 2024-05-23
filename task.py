@@ -168,6 +168,63 @@ def find_month(days_remaining, year):
 
 def conv_endian(num, endian='big'):
     """
-    Takes an integer num and converts it to a hexadecimal number. Endian type is determined by endian flag.
+    Takes an integer num and converts it to a hexadecimal number. Endian type
+    is determined by endian flag.
     """
-    pass
+    if endian not in ('big', 'little'):
+        return None
+    if num < 0:
+        is_neg = True
+    else:
+        is_neg = False
+
+    num = abs(num)
+
+    hex_str = conv_hex(num)
+    return_hex = split_bytes(hex_str, endian)
+
+    # Set sign of return_hex
+    if is_neg:
+        return_hex = '-' + return_hex
+
+    return return_hex
+
+
+def conv_hex(num):
+    """
+    Helper function for conv_endian. Takes integer, returns padded
+    hex string.
+    """
+    # Convert the integer into hexidecimal
+    hex_chars = '0123456789ABCDEF'
+    hex_str = ''
+    if num == 0:
+        hex_str = '0'
+
+    # Add converted remainders to hex_str in reverse order
+    while num > 0:
+        hex_str = hex_chars[num % 16] + hex_str
+        num //= 16
+
+    # Ensure the string has even number of characters, padding if needed
+    if len(hex_str) % 2 != 0:
+        hex_str = '0' + hex_str
+
+    return hex_str
+
+
+def split_bytes(hex_str, endian):
+    """
+    Helper function for conv_endian. Takes unordered and unsplit hex string
+    and returns hex string split into bytes and ordered by endianess.
+    """
+
+    # Split the string into bytes
+    hex_bytes = [hex_str[i:i+2] for i in range(0, len(hex_str), 2)]
+
+    # Manually reorder the bytes if the endian type is little
+    if endian == 'little':
+        hex_bytes.reverse()
+
+    # Join bytes with space between!
+    return ' '.join(hex_bytes)
