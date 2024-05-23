@@ -53,9 +53,9 @@ class Function1Tests(unittest.TestCase):
 
     def test_hex(self):
         """Testing hex string function."""
-        num_str = "0xAD4"
+        num_str = "-0xAD4"
         result = conv_num(num_str)
-        expected = 2772
+        expected = -2772
         self.assertEqual(result, expected)
 
 

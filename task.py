@@ -51,6 +51,14 @@ def is_valid_num(num_str):
 
 def is_valid_hex(num_str):
     """Helper function to return true if the string is a valid hexadecimal."""
+    # Check if negative.
+    if num_str[0] == '-':
+        # strip string of negative sign.
+        num_str = num_str[1:]
+        # check to see if string is empty.
+        if len(num_str) == 0:
+            return False
+
     if len(num_str) > 2 and num_str[0] == '0' and (num_str[1] == 'x' or
                                                    num_str[1] == 'X'):
         # store the numbers after the hex prefix.
@@ -118,6 +126,14 @@ def str_to_num(num_str):
 def hex_to_num(num_str):
     """Helper function to convert a valid hexadecimal string
     to a base 10 number."""
+    # Track negative flag.
+    is_negative = False
+    # If negative mark flag true.
+    if num_str[0] == '-':
+        is_negative = True
+        # strip negative sign.
+        num_str = num_str[1:]
+
     # Map to match the hexadecimal value to it's number.
     hex_map = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7,
                '8': 8, '9': 9, 'a': 10, 'b': 11, 'c': 12, 'd': 13, 'e': 14,
@@ -134,6 +150,10 @@ def hex_to_num(num_str):
             decimal_number = decimal_number * 16 + hex_map[char]
         else:
             return None
+
+    # if string is negative, return negative num.
+    if is_negative:
+        return -decimal_number
     return decimal_number
 
 
