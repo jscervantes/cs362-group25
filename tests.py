@@ -58,6 +58,38 @@ class Function1Tests(unittest.TestCase):
         expected = -2772
         self.assertEqual(result, expected)
 
+    def test_random_integers(self):
+        """Random tests using integers between 1 and 999999999999."""
+        tests = 100000
+        for i in range(tests):
+            expected = random.randint(0, 999999999999)
+            test_string = str(expected)
+            actual = conv_num(test_string)
+            self.assertEqual(actual, expected)
+
+    def test_random_floats(self):
+        """Random tests using floats between 1 and 99999999999."""
+        tests = 100000
+        for i in range(tests):
+            expected = random.uniform(0, 99999999999)
+            test_string = str(expected)
+            actual = conv_num(test_string)
+            self.assertEqual(actual, expected)
+
+    def test_random_hex(self):
+        """Random tests using hex numbers with lengths between 1 and 11."""
+        tests = 100000
+        for i in range(tests):
+            length = random.randint(0, 11)
+            test_string = ''.join(random.choice('0123456789abcdef') for _ in range(length))
+            try:
+                expected = int(test_string, 16)
+            except ValueError:
+                continue
+            test_string = '0x' + test_string
+            actual = conv_num(test_string)
+            self.assertEqual(actual, expected)
+
 
 class Function2Tests(unittest.TestCase):
     # Citation:
