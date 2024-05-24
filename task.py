@@ -199,10 +199,8 @@ def conv_endian(num, endian='big'):
     """
     if endian not in ('big', 'little'):
         return None
-    if num < 0:
-        is_neg = True
-    else:
-        is_neg = False
+
+    is_neg = num < 0
 
     num = abs(num)
 
