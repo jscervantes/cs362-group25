@@ -6,6 +6,11 @@ def conv_num(num_str):
     if len(num_str) == 0:
         return None
 
+    is_negative = False
+    if num_str[0] == '-':
+        is_negative = True
+        num_str = num_str[1:]
+
     # Check if the string is a string.
     if not isinstance(num_str, str):
         return None
@@ -13,27 +18,24 @@ def conv_num(num_str):
     # Strip leading and trailing whitespace from string.
     num_str = num_str.strip()
 
-    # Check if the passed string is a valid number.
+    # Check if the string is a valid number.
     if is_valid_num(num_str):
-        # if it is, then convert the string to a number.
-        return str_to_num(num_str)
+        number = str_to_num(num_str)
+        if is_negative:
+            return -number
+        return number
     elif is_valid_hex(num_str):
         # if a valid hex, convert string to a number.
-        return hex_to_num(num_str)
+        number = hex_to_num(num_str)
+        if is_negative:
+            return -number
+        return number
     else:
         return None
 
 
 def is_valid_num(num_str):
     """Helper function to return true if the string is a number."""
-    # Check if negative.
-    if num_str[0] == '-':
-        # strip string of negative sign.
-        num_str = num_str[1:]
-        # check to see if string is empty.
-        if len(num_str) == 0:
-            return False
-
     # Check for valid decimal points.
     if num_str.count('.') > 1:
         return False
@@ -51,17 +53,9 @@ def is_valid_num(num_str):
 
 def is_valid_hex(num_str):
     """Helper function to return true if the string is a valid hexadecimal."""
-    # Check if negative.
-    if num_str[0] == '-':
-        # strip string of negative sign.
-        num_str = num_str[1:]
-        # check to see if string is empty.
-        if len(num_str) == 0:
-            return False
-
+    # Check if the string has the hexadecimal prefix.
     if len(num_str) > 2 and num_str[0] == '0' and (num_str[1] == 'x' or
                                                    num_str[1] == 'X'):
-        # store the numbers after the hex prefix.
         hex_part = num_str[2:]
         # Iterate through the hex_part to see if is valid.
         for char in hex_part:
@@ -73,15 +67,6 @@ def is_valid_hex(num_str):
 
 def str_to_num(num_str):
     """Helper function to convert the string to a number"""
-    # Track negative flag.
-    is_negative = False
-    # If negative mark flag true.
-    if num_str[0] == '-':
-        is_negative = True
-        # strip negative sign.
-        num_str = num_str[1:]
-
-    # Check if the number is a float.
     if '.' in num_str:
         # Split the string at the "." and assign variables.
         int_part, fraction_part = num_str.split('.')
@@ -95,20 +80,15 @@ def str_to_num(num_str):
         digit = ord(char) - ord('0')
         num = num * 10 + digit
 
-    # Store the converted fractional part.
     if fraction_part:
-        # store the fraction number.
         frac_num = 0
         # Keep track of pos to the right of decimal.
         frac_pos = 1
 
         # iterate through the fraction_part.
         for char in fraction_part:
-            # Converts char into a digit.
             digit = ord(char) - ord('0')
-            # Keep track of base 10 position.
             frac_num = frac_num * 10 + digit
-            # Every iteration the fraction position is stored.
             frac_pos *= 10
         # store int number + (frac_num/frac_pos) in num.
         num += frac_num / frac_pos
@@ -116,32 +96,19 @@ def str_to_num(num_str):
     # if num has a "." make it a float.
     if '.' in num_str:
         num = num * 1.0
-
-    # if string is negative, return negative num.
-    if is_negative:
-        return -num
     return num
 
 
 def hex_to_num(num_str):
     """Helper function to convert a valid hexadecimal string
     to a base 10 number."""
-    # Track negative flag.
-    is_negative = False
-    # If negative mark flag true.
-    if num_str[0] == '-':
-        is_negative = True
-        # strip negative sign.
-        num_str = num_str[1:]
 
     # Map to match the hexadecimal value to it's number.
     hex_map = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7,
                '8': 8, '9': 9, 'a': 10, 'b': 11, 'c': 12, 'd': 13, 'e': 14,
                'f': 15, 'A': 10, 'B': 11, 'C': 12, 'D': 13, 'E': 14, 'F': 15}
 
-    # strip the hex_number.
     hex_part = num_str[2:]
-    # store the converted number.
     decimal_number = 0
     # Iterate through the string and verify if it is in the hex_map.
     for char in hex_part:
@@ -150,10 +117,6 @@ def hex_to_num(num_str):
             decimal_number = decimal_number * 16 + hex_map[char]
         else:
             return None
-
-    # if string is negative, return negative num.
-    if is_negative:
-        return -decimal_number
     return decimal_number
 
 
