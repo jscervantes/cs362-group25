@@ -240,6 +240,27 @@ class Function3Tests(unittest.TestCase):
             actual = conv_endian(hex_num_test)
             self.assertEqual(actual, expected)
 
+    def test_random_neg_big(self):
+        """Random tests using negative ints between 0 and 99999999999."""
+        tests = 1000000
+        for i in range(tests):
+            hex_num_test = random.randint(0, 99999999999)
+
+            hex_expected = hex(hex_num_test).lstrip("0x").upper()
+            hex_string = '{}'.format(hex_expected)
+
+            if len(hex_string) % 2 != 0:
+                hex_string = '0{}'.format(hex_string)
+
+            hex_bytes = [hex_string[i:i + 2] for i in range(0, len(hex_string), 2)]
+
+            expected = ' '.join(hex_bytes)
+
+            expected = '-{}'.format(expected)
+
+            actual = conv_endian(hex_num_test * -1)
+            self.assertEqual(actual, expected)
+
     def test_random_pos_little(self):
         """Random tests using positive ints between 1 and 99999999999."""
         tests = 1000000
