@@ -221,6 +221,104 @@ class Function3Tests(unittest.TestCase):
         expected = '-A2 91 0E'
         self.assertEqual(actual, expected)
 
+    def test_random_pos_big(self):
+        """Random tests using positive ints between 1 and 99999999999
+        and endian is big"""
+        tests = 1000000
+        for i in range(tests):
+            hex_num_test = random.randint(0, 99999999999)
+
+            actual = conv_endian(hex_num_test)
+
+            # Convert int to hex using hex() and format to match conv_endian()
+            hex_expected = hex(hex_num_test).lstrip("0x").upper()
+
+            hex_str = '{}'.format(hex_expected)
+
+            if len(hex_str) % 2 != 0:
+                hex_str = '0{}'.format(hex_str)
+
+            hex_bytes = [hex_str[i:i + 2] for i in range(0, len(hex_str), 2)]
+
+            expected = ' '.join(hex_bytes)
+
+            self.assertEqual(actual, expected)
+
+    def test_random_neg_big(self):
+        """Random tests using negative ints between 0 and 99999999999
+        and endian is big"""
+        tests = 1000000
+        for i in range(tests):
+            hex_num_test = random.randint(0, 99999999999)
+
+            actual = conv_endian(hex_num_test * -1)
+
+            # Convert int to hex using hex() and format to match conv_endian()
+            hex_expected = hex(hex_num_test).lstrip("0x").upper()
+            hex_str = '{}'.format(hex_expected)
+
+            if len(hex_str) % 2 != 0:
+                hex_str = '0{}'.format(hex_str)
+
+            hex_bytes = [hex_str[i:i + 2] for i in range(0, len(hex_str), 2)]
+
+            expected = ' '.join(hex_bytes)
+
+            expected = '-{}'.format(expected)
+
+            self.assertEqual(actual, expected)
+
+    def test_random_pos_little(self):
+        """Random tests using positive ints between 0 and 99999999999
+        and endian is little"""
+        tests = 1000000
+        for i in range(tests):
+            hex_num_test = random.randint(0, 99999999999)
+
+            actual = conv_endian(hex_num_test, 'little')
+
+            # Convert int to hex using hex() and format to match conv_endian()
+            hex_expected = hex(hex_num_test).lstrip("0x").upper()
+            hex_str = '{}'.format(hex_expected)
+
+            if len(hex_str) % 2 != 0:
+                hex_str = '0{}'.format(hex_str)
+
+            hex_bytes = [hex_str[i:i + 2] for i in range(0, len(hex_str), 2)]
+
+            hex_bytes.reverse()
+
+            expected = ' '.join(hex_bytes)
+
+            self.assertEqual(actual, expected)
+
+    def test_random_neg_little(self):
+        """Random tests using negative ints between 0 and 99999999999
+        and endian is little"""
+        tests = 1000000
+        for i in range(tests):
+            hex_num_test = random.randint(0, 99999999999)
+
+            actual = conv_endian(hex_num_test * -1, 'little')
+
+            # Convert int to hex using hex() and format to match conv_endian()
+            hex_expected = hex(hex_num_test).lstrip("0x").upper()
+
+            hex_str = '{}'.format(hex_expected)
+
+            if len(hex_str) % 2 != 0:
+                hex_str = '0{}'.format(hex_str)
+
+            hex_bytes = [hex_str[i:i + 2] for i in range(0, len(hex_str), 2)]
+
+            hex_bytes.reverse()
+
+            expected = ' '.join(hex_bytes)
+
+            expected = '-{}'.format(expected)
+
+            self.assertEqual(actual, expected)
+
 
 if __name__ == '__main__':
     unittest.main()
