@@ -81,7 +81,8 @@ class Function1Tests(unittest.TestCase):
         tests = 100000
         for i in range(tests):
             length = random.randint(0, 11)
-            test_string = ''.join(random.choice('0123456789abcdef') for _ in range(length))
+            test_string = ''.join(random.choice('0123456789abcdef')
+                                  for _ in range(length))
             try:
                 expected = int(test_string, 16)
             except ValueError:
@@ -155,6 +156,21 @@ class Function2Tests(unittest.TestCase):
             actual = my_datetime(num_sec)
             expected = datetime.utcfromtimestamp(num_sec).strftime('%m-%d-%Y')
             self.assertEqual(actual, expected)
+
+    def test_datetime(self):
+        """Testing my partner's function"""
+        for _ in range(1000):
+            num_sec = random.randint(0, 253402300799)
+            actual = my_datetime(num_sec)
+            expected = datetime.utcfromtimestamp(num_sec).strftime('%m-%d-%Y')
+            self.assertEqual(actual, expected)
+
+    def test_edge_case(self):
+        """Testing my_datetime() with a timestamp close to the epoch."""
+        num_sec = 60
+        actual = my_datetime(num_sec)
+        expected = datetime.utcfromtimestamp(num_sec).strftime('%m-%d-%Y')
+        self.assertEqual(actual, expected)
 
 
 class Function3Tests(unittest.TestCase):
