@@ -15,9 +15,6 @@ def conv_num(num_str):
     if not isinstance(num_str, str):
         return None
 
-    # Strip leading and trailing whitespace from string.
-    num_str = num_str.strip()
-
     # Check if the string is a valid number.
     if is_valid_num(num_str):
         number = str_to_num(num_str)

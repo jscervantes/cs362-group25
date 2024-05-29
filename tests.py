@@ -91,6 +91,13 @@ class Function1Tests(unittest.TestCase):
             actual = conv_num(test_string)
             self.assertEqual(actual, expected)
 
+    def test_spaces(self):
+        """Testing white spaces to see if it returns None"""
+        num_str = " 0.123 "
+        result = conv_num(num_str)
+        expected = None
+        self.assertEqual(result, expected)
+
 
 class Function2Tests(unittest.TestCase):
     # Citation:
