@@ -77,7 +77,10 @@ class Function1Tests(unittest.TestCase):
             self.assertEqual(actual, expected)
 
     def test_pos_random_hex(self):
-        """Random tests using positive hex numbers with lengths between 1 and 11."""
+        """
+        Random tests using positive hex numbers with lengths between 1 and
+        11.
+        """
         tests = 100000
         for i in range(tests):
             length = random.randint(0, 11)
@@ -92,7 +95,9 @@ class Function1Tests(unittest.TestCase):
             self.assertEqual(actual, expected)
 
     def test_neg_random_integers(self):
-        """Random tests using negative integers between 1 and 999999999999."""
+        """
+        Random tests using negative integers between 1 and 999999999999.
+        """
         tests = 100000
         for i in range(tests):
             expected = -(random.randint(1, 999999999999))
@@ -110,7 +115,9 @@ class Function1Tests(unittest.TestCase):
             self.assertEqual(actual, expected)
 
     def test_neg_random_hex(self):
-        """Random tests using negative hex numbers with lengths between 1 and 11."""
+        """
+        Random tests using negative hex numbers with lengths between 1 and 11.
+        """
         tests = 100000
         for i in range(tests):
             length = random.randint(0, 11)
