@@ -4,12 +4,6 @@ from datetime import datetime
 import random
 
 
-class TestCase(unittest.TestCase):
-
-    def test1(self):
-        self.assertTrue(True)
-
-
 class Function1Tests(unittest.TestCase):
     def test_empty_string(self):
         """Test if empty string"""
@@ -285,8 +279,10 @@ class Function3Tests(unittest.TestCase):
         self.assertEqual(actual, expected)
 
     def test_random_pos_big(self):
-        """Random tests using positive ints between 1 and 99999999999
-        and endian is big"""
+        """
+        Random tests using positive ints between 1 and 99999999999
+        and endian is big
+        """
         tests = 1000000
         for i in range(tests):
             hex_num_test = random.randint(0, 99999999999)
@@ -308,8 +304,10 @@ class Function3Tests(unittest.TestCase):
             self.assertEqual(actual, expected)
 
     def test_random_neg_big(self):
-        """Random tests using negative ints between 0 and 99999999999
-        and endian is big"""
+        """
+        Random tests using negative ints between 0 and 99999999999
+        and endian is big
+        """
         tests = 1000000
         for i in range(tests):
             hex_num_test = random.randint(0, 99999999999)
@@ -332,8 +330,10 @@ class Function3Tests(unittest.TestCase):
             self.assertEqual(actual, expected)
 
     def test_random_pos_little(self):
-        """Random tests using positive ints between 0 and 99999999999
-        and endian is little"""
+        """
+        Random tests using positive ints between 0 and 99999999999
+        and endian is little
+        """
         tests = 1000000
         for i in range(tests):
             hex_num_test = random.randint(0, 99999999999)
@@ -356,8 +356,10 @@ class Function3Tests(unittest.TestCase):
             self.assertEqual(actual, expected)
 
     def test_random_neg_little(self):
-        """Random tests using negative ints between 0 and 99999999999
-        and endian is little"""
+        """
+        Random tests using negative ints between 0 and 99999999999
+        and endian is little
+        """
         tests = 1000000
         for i in range(tests):
             hex_num_test = random.randint(0, 99999999999)

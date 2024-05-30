@@ -37,7 +37,7 @@ def is_valid_num(num_str):
     if num_str.count('.') > 1:
         return False
 
-    # Check if the string only has a decmial point.
+    # Check if the string only has a decimal point.
     if num_str == '.':
         return False
 
@@ -118,9 +118,11 @@ def hex_to_num(num_str):
 
 
 def my_datetime(num_sec):
-    """Takes an integer value that represents the number of seconds
-        since the epoch (01/01/1970) and returns the date as a string
-        """
+    """
+    Takes an integer value that represents the number of seconds since the
+    epoch (01/01/1970) and returns the date as a string
+    """
+
     # Calculates the number of days
     year_days_remaining = (num_sec/86400)
 
@@ -138,9 +140,11 @@ def my_datetime(num_sec):
 
 
 def leap_year(year):
-    """Determines if a year is a leap year.
-    Returns True if a leap year and False otherwise
     """
+    Determines if a year is a leap year.
+    Returns True if a leap year and False otherwise.
+    """
+
     if year % 100 == 0 and year % 400 == 0:
         return True
 
@@ -154,9 +158,11 @@ def leap_year(year):
 
 
 def find_year(days_remaining):
-    """Determines the year of the new date and
-    returns the year and the remaining days
     """
+    Determines the year of the new date and returns the year and
+    the remaining days.
+    """
+
     # Iterates through each year until days remaining are less than a full year
     year = 1970
     while ((leap_year(year) is True and days_remaining >= 366) or
@@ -172,9 +178,11 @@ def find_year(days_remaining):
 
 
 def find_month(days_remaining, year):
-    """Determines the month of the new date and
-    returns the month and the remaining days
     """
+    Determines the month of the new date and returns the month and
+    the remaining days.
+    """
+
     # Determines leap year and corresponding number of days for each month
     if leap_year(year):
         days_in_month = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
@@ -216,7 +224,7 @@ def conv_hex(num):
     Helper function for conv_endian. Takes integer, returns padded
     hex string.
     """
-    # Convert the integer into hexidecimal
+    # Convert the integer into hexadecimal
     hex_chars = '0123456789ABCDEF'
     hex_str = ''
     if num == 0:
