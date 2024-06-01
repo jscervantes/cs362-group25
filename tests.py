@@ -1,10 +1,11 @@
 import unittest
 from task import my_datetime, conv_endian, conv_num
-from datetime import datetime
+from datetime import datetime, timezone
 import random
 
 
 class Function1Tests(unittest.TestCase):
+    """Tests for Function 1 conv_num()"""
     def test_empty_string(self):
         """Test if empty string"""
         num_str = ''
@@ -134,51 +135,59 @@ class Function1Tests(unittest.TestCase):
 
 
 class Function2Tests(unittest.TestCase):
-    # Citation:
-    # docs.python.org/3/library/datetime.html#datetime.datetime.utcfromtimestamp
-    # docs.python.org/3/library/datetime.html#datetime.date.strftime
+    """
+    Tests for Function 2 my_datetime()
+    Citation:
+    docs.python.org/3/library/datetime.html#datetime.date.strftime
+    """
 
     def test1(self):
         """Test edge case of 0 seconds"""
         num_sec = 0
         actual = my_datetime(num_sec)
-        expected = datetime.utcfromtimestamp(num_sec).strftime('%m-%d-%Y')
-        self.assertEqual(actual, expected)
+        expected = datetime.fromtimestamp(num_sec, tz=timezone.utc)
+        expected_formatted = expected.strftime('%m-%d-%Y')
+        self.assertEqual(actual, expected_formatted)
 
     def test2(self):
         """Test edge case of 12/31/9999"""
         num_sec = 253402300799
         actual = my_datetime(num_sec)
-        expected = datetime.utcfromtimestamp(num_sec).strftime('%m-%d-%Y')
-        self.assertEqual(actual, expected)
+        expected = datetime.fromtimestamp(num_sec, tz=timezone.utc)
+        expected_formatted = expected.strftime('%m-%d-%Y')
+        self.assertEqual(actual, expected_formatted)
 
     def test3(self):
         """Test example in assignment"""
         num_sec = 9876543210
         actual = my_datetime(num_sec)
-        expected = datetime.utcfromtimestamp(num_sec).strftime('%m-%d-%Y')
-        self.assertEqual(actual, expected)
+        expected = datetime.fromtimestamp(num_sec, tz=timezone.utc)
+        expected_formatted = expected.strftime('%m-%d-%Y')
+        self.assertEqual(actual, expected_formatted)
 
     def test4(self):
         """Test example in assignment"""
         num_sec = 123456789
         actual = my_datetime(num_sec)
-        expected = datetime.utcfromtimestamp(num_sec).strftime('%m-%d-%Y')
-        self.assertEqual(actual, expected)
+        expected = datetime.fromtimestamp(num_sec, tz=timezone.utc)
+        expected_formatted = expected.strftime('%m-%d-%Y')
+        self.assertEqual(actual, expected_formatted)
 
     def test5(self):
         """Test example in assignment"""
         num_sec = 201653971200
         actual = my_datetime(num_sec)
-        expected = datetime.utcfromtimestamp(num_sec).strftime('%m-%d-%Y')
-        self.assertEqual(actual, expected)
+        expected = datetime.fromtimestamp(num_sec, tz=timezone.utc)
+        expected_formatted = expected.strftime('%m-%d-%Y')
+        self.assertEqual(actual, expected_formatted)
 
     def test6(self):
         """Test 2/29 in leap year"""
         num_sec = 1709193600
         actual = my_datetime(num_sec)
-        expected = datetime.utcfromtimestamp(num_sec).strftime('%m-%d-%Y')
-        self.assertEqual(actual, expected)
+        expected = datetime.fromtimestamp(num_sec, tz=timezone.utc)
+        expected_formatted = expected.strftime('%m-%d-%Y')
+        self.assertEqual(actual, expected_formatted)
 
     def test_random_large_set(self):
         """Random tests that go up to 12/31/9999"""
@@ -186,8 +195,9 @@ class Function2Tests(unittest.TestCase):
         for i in range(tests):
             num_sec = random.randint(0, 253402300799)
             actual = my_datetime(num_sec)
-            expected = datetime.utcfromtimestamp(num_sec).strftime('%m-%d-%Y')
-            self.assertEqual(actual, expected)
+            expected = datetime.fromtimestamp(num_sec, tz=timezone.utc)
+            expected_formatted = expected.strftime('%m-%d-%Y')
+            self.assertEqual(actual, expected_formatted)
 
     def test_random_small_set(self):
         """Random tests that run locally but will not go up to year 9999"""
@@ -195,26 +205,30 @@ class Function2Tests(unittest.TestCase):
         for i in range(tests):
             num_sec = random.randint(0, 9999999999)
             actual = my_datetime(num_sec)
-            expected = datetime.utcfromtimestamp(num_sec).strftime('%m-%d-%Y')
-            self.assertEqual(actual, expected)
+            expected = datetime.fromtimestamp(num_sec, tz=timezone.utc)
+            expected_formatted = expected.strftime('%m-%d-%Y')
+            self.assertEqual(actual, expected_formatted)
 
     def test_datetime(self):
         """Testing my partner's function"""
         for _ in range(1000):
             num_sec = random.randint(0, 253402300799)
             actual = my_datetime(num_sec)
-            expected = datetime.utcfromtimestamp(num_sec).strftime('%m-%d-%Y')
-            self.assertEqual(actual, expected)
+            expected = datetime.fromtimestamp(num_sec, tz=timezone.utc)
+            expected_formatted = expected.strftime('%m-%d-%Y')
+            self.assertEqual(actual, expected_formatted)
 
     def test_edge_case(self):
         """Testing my_datetime() with a timestamp close to the epoch."""
         num_sec = 60
         actual = my_datetime(num_sec)
-        expected = datetime.utcfromtimestamp(num_sec).strftime('%m-%d-%Y')
-        self.assertEqual(actual, expected)
+        expected = datetime.fromtimestamp(num_sec, tz=timezone.utc)
+        expected_formatted = expected.strftime('%m-%d-%Y')
+        self.assertEqual(actual, expected_formatted)
 
 
 class Function3Tests(unittest.TestCase):
+    """Tests for Function 3 conv_endian()"""
     def test1(self):
         """
         Test function returns correct output when endian not 'big' or
